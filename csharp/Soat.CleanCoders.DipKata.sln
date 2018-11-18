@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soat.CleanCoders.DipKata", "Soat.CleanCoders.DipKata.csproj", "{E414010A-0E50-456B-91AC-16FBE1C86096}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E414010A-0E50-456B-91AC-16FBE1C86096}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E414010A-0E50-456B-91AC-16FBE1C86096}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E414010A-0E50-456B-91AC-16FBE1C86096}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E414010A-0E50-456B-91AC-16FBE1C86096}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

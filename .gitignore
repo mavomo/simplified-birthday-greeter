@@ -1,0 +1,9 @@
+.idea/
+.vs/
+node_modules/
+/csharp/**/bin/
+/csharp/**/obj/
+/csharp/packages
+/java/.gradle/
+/java/build/
+/java/out/
