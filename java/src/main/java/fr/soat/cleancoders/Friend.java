@@ -22,8 +22,4 @@ public class Friend {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
-    public String messageFor(String message) {
-        return String.format(message, getName());
-    }
 }
