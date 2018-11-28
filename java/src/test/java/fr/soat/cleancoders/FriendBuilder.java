@@ -7,6 +7,7 @@ public class FriendBuilder {
     private String lastName = "Doe";
     private LocalDate dateOfBirth = LocalDate.of(1980, 9, 10);
     private String email = "john.doe@foobar.com";
+    private String phoneNumber = "06xxxxxx";
 
     public static FriendBuilder aFriend() {
         return new FriendBuilder();
@@ -34,7 +35,6 @@ public class FriendBuilder {
     }
 
     public Friend build() {
-
-        return new Friend(firstName, email);
+        return new Friend(firstName, email, phoneNumber);
     }
 }

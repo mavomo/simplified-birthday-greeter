@@ -1,5 +1,8 @@
 package fr.soat.cleancoders;
 
+import fr.soat.cleancoders.highLevel.BirthdayGreeter;
+import fr.soat.cleancoders.lowlevel.EmailSender;
+import fr.soat.cleancoders.lowlevel.SMSSender;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,18 +47,31 @@ public class BirthdayGreeterShould {
                 .willReturn(singletonList(aFriend));
 
 
-        birthdayGreeter.sendGreetings();
+        birthdayGreeter.sendGreetings(new EmailSender());
 
-        final String content = "To:" + aFriend.getContact() + ", Subject: Happy birthday!, Message: Happy birthday, dear " + aFriend.getName() + "!";
+        final String content = "To:" + aFriend.getEmailAdress() + ", Subject: Happy birthday!, Message: Happy birthday, dear " + aFriend.getName() + "!";
         then(printStream).should().print(content);
     }
 
+    @Test
+    public void send_a_greeting_sms_to_the_friend_born_today() {
+        Friend aFriend = FriendBuilder.aFriend().build();
+
+        given(friendRepository.findFriendsBornOn(now()))
+                .willReturn(singletonList(aFriend));
+
+
+        birthdayGreeter.sendGreetings(new SMSSender());
+
+        final String content = "To:" + aFriend.getPhoneNumber() + " Message: Happy birthday, my dear " + aFriend.getName() + "!";
+        then(printStream).should().print(content);
+    }
     @Test
     public void not_send_any_greeting_email_when_its_nobody_s_birthday() {
         willReturn(EMPTY_LIST)
                 .given(friendRepository).findFriendsBornOn(now());
 
-        birthdayGreeter.sendGreetings();
+        birthdayGreeter.sendGreetings(new EmailSender());
 
         then(printStream).should(never()).print(anyString());
     }
