@@ -1,8 +1,5 @@
 package fr.soat.cleancoders;
 
-import fr.soat.cleancoders.highLevel.BirthdayGreeter;
-import fr.soat.cleancoders.lowlevel.EmailSender;
-import fr.soat.cleancoders.lowlevel.SMSSender;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,9 +13,7 @@ import java.io.PrintStream;
 import static java.time.MonthDay.now;
 import static java.util.Collections.EMPTY_LIST;
 import static java.util.Collections.singletonList;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
-import static org.mockito.BDDMockito.willReturn;
+import static org.mockito.BDDMockito.*;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.never;
 
@@ -47,31 +42,18 @@ public class BirthdayGreeterShould {
                 .willReturn(singletonList(aFriend));
 
 
-        birthdayGreeter.sendGreetings(new EmailSender());
+        birthdayGreeter.sendGreetings();
 
         final String content = "To:" + aFriend.getEmailAdress() + ", Subject: Happy birthday!, Message: Happy birthday, dear " + aFriend.getName() + "!";
         then(printStream).should().print(content);
     }
 
     @Test
-    public void send_a_greeting_sms_to_the_friend_born_today() {
-        Friend aFriend = FriendBuilder.aFriend().build();
-
-        given(friendRepository.findFriendsBornOn(now()))
-                .willReturn(singletonList(aFriend));
-
-
-        birthdayGreeter.sendGreetings(new SMSSender());
-
-        final String content = "To:" + aFriend.getPhoneNumber() + " Message: Happy birthday, my dear " + aFriend.getName() + "!";
-        then(printStream).should().print(content);
-    }
-    @Test
     public void not_send_any_greeting_email_when_its_nobody_s_birthday() {
         willReturn(EMPTY_LIST)
                 .given(friendRepository).findFriendsBornOn(now());
 
-        birthdayGreeter.sendGreetings(new EmailSender());
+        birthdayGreeter.sendGreetings();
 
         then(printStream).should(never()).print(anyString());
     }
