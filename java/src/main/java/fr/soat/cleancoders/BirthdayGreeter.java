@@ -1,8 +1,6 @@
 package fr.soat.cleancoders;
 
-import java.time.MonthDay;
-
-import static java.time.MonthDay.*;
+import static java.time.MonthDay.now;
 
 public class BirthdayGreeter {
     private final FriendRepository friendRepository;
