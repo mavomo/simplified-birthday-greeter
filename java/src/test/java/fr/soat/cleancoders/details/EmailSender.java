@@ -6,9 +6,9 @@ import fr.soat.cleancoders.highlevel.MessageSender;
 
 public class EmailSender extends MessageSender {
     @Override
-    protected void sendContentTo(Friend aFriend) {
+    protected void sendContentTo(Friend aFriend, String message) {
         System.out.print("To:" + aFriend.getEmailAdress() + ", Subject: Happy birthday!" + ", Message: "
-                + buildMessageFor(aFriend.getName()));
+                + message);
     }
 
     @Override

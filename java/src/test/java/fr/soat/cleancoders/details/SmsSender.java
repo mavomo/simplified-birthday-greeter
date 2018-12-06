@@ -5,8 +5,8 @@ import fr.soat.cleancoders.highlevel.MessageSender;
 
 public class SmsSender extends MessageSender {
     @Override
-    protected void sendContentTo(Friend aFriend) {
-        System.out.print("To:" + aFriend.getPhoneNumber() + ", " + buildMessageFor(aFriend.getName()));
+    protected void sendContentTo(Friend aFriend, String message) {
+        System.out.print("To:" + aFriend.getPhoneNumber() + ", " + message);
     }
 
     @Override
