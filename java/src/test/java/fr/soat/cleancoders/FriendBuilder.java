@@ -1,6 +1,6 @@
 package fr.soat.cleancoders;
 
-import fr.soat.cleancoders.highlevel.BirthdayGreeter;
+import fr.soat.cleancoders.highlevel.Friend;
 
 import java.time.LocalDate;
 
@@ -36,7 +36,7 @@ public class FriendBuilder {
         return this;
     }
 
-    public BirthdayGreeter.Friend build() {
-        return new BirthdayGreeter.Friend(firstName, email, phoneNumber);
+    public Friend build() {
+        return new Friend(firstName, email, phoneNumber);
     }
 }

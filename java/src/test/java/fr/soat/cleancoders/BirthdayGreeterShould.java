@@ -1,9 +1,11 @@
 package fr.soat.cleancoders;
 
 import fr.soat.cleancoders.details.EmailSender;
+import fr.soat.cleancoders.highlevel.Friend;
+import fr.soat.cleancoders.highlevel.MessageSender;
+import fr.soat.cleancoders.details.SmsSender;
 import fr.soat.cleancoders.highlevel.BirthdayGreeter;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -43,7 +45,7 @@ public class BirthdayGreeterShould {
 
     @Test
     public void send_a_greeting_email_to_the_friend_born_today() {
-        BirthdayGreeter.Friend aFriend = FriendBuilder.aFriend().build();
+        Friend aFriend = FriendBuilder.aFriend().build();
         given(friendRepository.findFriendsBornOn(now()))
                 .willReturn(singletonList(aFriend));
 
@@ -56,7 +58,7 @@ public class BirthdayGreeterShould {
 
     @Test
     public void send_a_greeting_sms_to_the_friend_born_today() {
-        BirthdayGreeter.Friend aFriend = FriendBuilder.aFriend().build();
+        Friend aFriend = FriendBuilder.aFriend().build();
         given(friendRepository.findFriendsBornOn(now()))
                 .willReturn(singletonList(aFriend));
 
