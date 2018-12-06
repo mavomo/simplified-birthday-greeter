@@ -6,6 +6,10 @@ import fr.soat.cleancoders.highlevel.MessageSender;
 public class SmsSender implements MessageSender {
     @Override
     public void send(Friend aFriend, String message) {
-        System.out.print("To:" + aFriend.getPhoneNumber() + ", Subject: Happy birthday!" + ", Message: " + message);
+        System.out.print("To:" + aFriend.getPhoneNumber() + ", " + messageForA(aFriend.getName()));
+    }
+
+    private String messageForA(String name) {
+        return String.format("Happy birthday, my dear %s!", name);
     }
 }

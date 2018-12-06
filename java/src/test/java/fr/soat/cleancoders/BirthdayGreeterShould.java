@@ -65,7 +65,7 @@ public class BirthdayGreeterShould {
 
         birthdayGreeter.sendGreetings(smsSender);
 
-        final String content = "To:" + aFriend.getPhoneNumber() + ", Subject: Happy birthday!, Message: Happy birthday, dear " + aFriend.getName() + "!";
+        final String content = "To:" + aFriend.getPhoneNumber() + ", Happy birthday, my dear " + aFriend.getName() + "!";
         then(printStream).should().print(content);
     }
 
