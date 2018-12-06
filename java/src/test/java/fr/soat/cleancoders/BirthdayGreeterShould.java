@@ -1,6 +1,8 @@
 package fr.soat.cleancoders;
 
+import fr.soat.cleancoders.highlevel.BirthdayGreeter;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -45,6 +47,20 @@ public class BirthdayGreeterShould {
         birthdayGreeter.sendGreetings();
 
         final String content = "To:" + aFriend.getEmailAdress() + ", Subject: Happy birthday!, Message: Happy birthday, dear " + aFriend.getName() + "!";
+        then(printStream).should().print(content);
+    }
+
+    @Test
+    @Ignore
+    public void send_a_greeting_sms_to_the_friend_born_today() {
+        Friend aFriend = FriendBuilder.aFriend().build();
+        given(friendRepository.findFriendsBornOn(now()))
+                .willReturn(singletonList(aFriend));
+
+
+        birthdayGreeter.sendGreetings();
+
+        final String content = "To:" + aFriend.getPhoneNumber() + ", Subject: Happy birthday!, Message: Happy birthday, dear " + aFriend.getName() + "!";
         then(printStream).should().print(content);
     }
 

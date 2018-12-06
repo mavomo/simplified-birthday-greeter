@@ -1,4 +1,8 @@
-package fr.soat.cleancoders;
+package fr.soat.cleancoders.highlevel;
+
+import fr.soat.cleancoders.EmailSender;
+import fr.soat.cleancoders.Friend;
+import fr.soat.cleancoders.FriendRepository;
 
 import static java.time.MonthDay.now;
 
@@ -13,11 +17,12 @@ public class BirthdayGreeter {
         friendRepository.findFriendsBornOn(now())
                 .forEach(friend -> {
                     String message = emailFor(friend);
-                    new EmailSender().send(friend.getEmailAdress(), message);
+                    final String contact = friend.getEmailAdress();
+                    new EmailSender().send(contact, message);
                 });
     }
 
-    public String emailFor(Friend friend){
+    private String emailFor(Friend friend){
         return String.format("Happy birthday, dear %s!", friend.getName());
 
     }
