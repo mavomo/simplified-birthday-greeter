@@ -3,13 +3,14 @@ package fr.soat.cleancoders.details;
 import fr.soat.cleancoders.highlevel.Friend;
 import fr.soat.cleancoders.highlevel.MessageSender;
 
-public class SmsSender implements MessageSender {
+public class SmsSender extends MessageSender {
     @Override
-    public void send(Friend aFriend) {
-        System.out.print("To:" + aFriend.getPhoneNumber() + ", " + messageForA(aFriend.getName()));
+    protected void sendContentTo(Friend aFriend) {
+        System.out.print("To:" + aFriend.getPhoneNumber() + ", " + buildMessageFor(aFriend.getName()));
     }
 
-    private String messageForA(String name) {
+    @Override
+    protected String buildMessageFor(String name) {
         return String.format("Happy birthday, my dear %s!", name);
     }
 }
