@@ -14,14 +14,7 @@ public class BirthdayGreeter {
     public void sendGreetings(MessageSender messenger) {
         friendRepository.findFriendsBornOn(now())
                 .forEach(friend -> {
-                    String message = messageForA(friend);
-                    messenger.send(friend, message);
+                    messenger.send(friend);
                 });
     }
-
-    private String messageForA(Friend friend){
-        return String.format("Happy birthday, dear %s!", friend.getName());
-
-    }
-
 }

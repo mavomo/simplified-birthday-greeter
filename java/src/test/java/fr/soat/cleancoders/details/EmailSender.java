@@ -7,7 +7,12 @@ import fr.soat.cleancoders.highlevel.MessageSender;
 public class EmailSender implements MessageSender {
 
     @Override
-    public void send(Friend aFriend, String message) {
-        System.out.print("To:" + aFriend.getEmailAdress() + ", Subject: Happy birthday!" + ", Message: " + message);
+    public void send(Friend aFriend) {
+        System.out.print("To:" + aFriend.getEmailAdress() + ", Subject: Happy birthday!" + ", Message: "
+                + messageForA(aFriend.getName()));
+    }
+
+    private String messageForA(String name) {
+        return String.format("Happy birthday, dear %s!", name);
     }
 }
