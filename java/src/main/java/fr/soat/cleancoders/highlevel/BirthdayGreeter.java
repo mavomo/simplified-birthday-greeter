@@ -1,7 +1,6 @@
 package fr.soat.cleancoders.highlevel;
 
-import fr.soat.cleancoders.EmailSender;
-import fr.soat.cleancoders.Friend;
+import fr.soat.cleancoders.MessageSender;
 import fr.soat.cleancoders.FriendRepository;
 
 import static java.time.MonthDay.now;
@@ -13,12 +12,12 @@ public class BirthdayGreeter {
         this.friendRepository = employeeRepository;
     }
 
-    public void sendGreetings() {
+    public void sendGreetings(MessageSender messenger) {
         friendRepository.findFriendsBornOn(now())
                 .forEach(friend -> {
                     String message = emailFor(friend);
                     final String contact = friend.getEmailAdress();
-                    new EmailSender().send(contact, message);
+                    messenger.send(friend, message);
                 });
     }
 
@@ -27,4 +26,27 @@ public class BirthdayGreeter {
 
     }
 
+    public static class Friend {
+        private final String name;
+        private final String emailAdress;
+        private final String phoneNumber;
+
+        public Friend(String name, String email, String phoneNumber) {
+            this.name = name;
+            this.emailAdress = email;
+            this.phoneNumber = phoneNumber;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getEmailAdress() {
+            return emailAdress;
+        }
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package fr.soat.cleancoders;
 
+import fr.soat.cleancoders.details.EmailSender;
 import fr.soat.cleancoders.highlevel.BirthdayGreeter;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -32,6 +33,9 @@ public class BirthdayGreeterShould {
     @InjectMocks
     private BirthdayGreeter birthdayGreeter;
 
+    private final MessageSender emailSender = new EmailSender();
+    private MessageSender smsSender = new SmsSender();
+
     @Before
     public void setUp() {
         System.setOut(printStream);
@@ -39,26 +43,25 @@ public class BirthdayGreeterShould {
 
     @Test
     public void send_a_greeting_email_to_the_friend_born_today() {
-        Friend aFriend = FriendBuilder.aFriend().build();
+        BirthdayGreeter.Friend aFriend = FriendBuilder.aFriend().build();
         given(friendRepository.findFriendsBornOn(now()))
                 .willReturn(singletonList(aFriend));
 
 
-        birthdayGreeter.sendGreetings();
+        birthdayGreeter.sendGreetings(emailSender);
 
         final String content = "To:" + aFriend.getEmailAdress() + ", Subject: Happy birthday!, Message: Happy birthday, dear " + aFriend.getName() + "!";
         then(printStream).should().print(content);
     }
 
     @Test
-    @Ignore
     public void send_a_greeting_sms_to_the_friend_born_today() {
-        Friend aFriend = FriendBuilder.aFriend().build();
+        BirthdayGreeter.Friend aFriend = FriendBuilder.aFriend().build();
         given(friendRepository.findFriendsBornOn(now()))
                 .willReturn(singletonList(aFriend));
 
 
-        birthdayGreeter.sendGreetings();
+        birthdayGreeter.sendGreetings(smsSender);
 
         final String content = "To:" + aFriend.getPhoneNumber() + ", Subject: Happy birthday!, Message: Happy birthday, dear " + aFriend.getName() + "!";
         then(printStream).should().print(content);
@@ -69,7 +72,7 @@ public class BirthdayGreeterShould {
         willReturn(EMPTY_LIST)
                 .given(friendRepository).findFriendsBornOn(now());
 
-        birthdayGreeter.sendGreetings();
+        birthdayGreeter.sendGreetings(emailSender);
 
         then(printStream).should(never()).print(anyString());
     }
