@@ -14,6 +14,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import java.io.PrintStream;
+import java.util.Collections;
 
 import static java.time.MonthDay.now;
 import static java.util.Collections.EMPTY_LIST;
@@ -61,6 +62,18 @@ public class BirthdayGreeterShould {
         Friend aFriend = FriendBuilder.aFriend().build();
         given(friendRepository.findFriendsBornOn(now()))
                 .willReturn(singletonList(aFriend));
+
+
+        birthdayGreeter.sendGreetings(smsSender);
+
+        final String content = "To:" + aFriend.getPhoneNumber() + ", Happy birthday, my dear " + aFriend.getName() + "!";
+        then(printStream).should().print(content);
+    }
+    @Test
+    public void send_a_greeting_sms_to_the_friend_born_today() {
+        Friend aFriend = FriendBuilder.aFriend().build();
+        given(friendRepository.findFriendsBornOn(now()))
+                .willReturn(List.of);
 
 
         birthdayGreeter.sendGreetings(smsSender);

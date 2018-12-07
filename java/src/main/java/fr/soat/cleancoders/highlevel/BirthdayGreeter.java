@@ -14,7 +14,7 @@ public class BirthdayGreeter {
     public void sendGreetings(MessageSender messenger) {
         friendRepository.findFriendsBornOn(now())
                 .forEach(friend -> {
-                    messenger.send(friend);
+                    messenger.sendMessageToA(friend);
                 });
     }
 }

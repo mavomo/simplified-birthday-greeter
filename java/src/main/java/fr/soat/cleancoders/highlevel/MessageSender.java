@@ -2,7 +2,7 @@ package fr.soat.cleancoders.highlevel;
 
 public abstract class MessageSender {
 
-    void send(Friend aFriend) {
+    void sendMessageToA(Friend aFriend) {
         final String message = buildMessageFor(aFriend.getName());
 
         sendContentTo(aFriend, message);
