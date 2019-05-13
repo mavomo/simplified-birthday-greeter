@@ -1,4 +1,4 @@
-package fr.soat.cleancoders;
+package fr.soat.dip;
 
 import org.junit.Before;
 import org.junit.Rule;

@@ -1,4 +1,4 @@
-package fr.soat.cleancoders;
+package fr.soat.dip;
 
 import java.time.MonthDay;
 import java.util.List;
